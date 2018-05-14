@@ -120,7 +120,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { MINE, NUMPAD, FUNCTION, ACCENTS }; // layers
+enum { MINE, DVORAK, QWERTY, NUMPAD, FUNCTION, ACCENTS }; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement
  *   so we can make the keymaps actually resemble the physical key layout better
@@ -137,13 +137,42 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
    OSL(FUNCTION),
 
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
+   LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   OSL(ACCENTS),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   LockLayer(QWERTY),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
    ShiftToLayer(FUNCTION)),
 
+  [DVORAK] = KEYMAP_STACKED
+  (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LEDEffectNext,
+   Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
+   Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
+   Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
+   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
+   ShiftToLayer(FUNCTION),
+
+   ___,   Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
+   Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
+                   Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
+   OSL(ACCENTS),   Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
+   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
+   ShiftToLayer(FUNCTION)),
+
+  [QWERTY] = KEYMAP_STACKED
+  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
+   ShiftToLayer(FUNCTION),
+
+   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
+   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
+   ___,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
+   ShiftToLayer(FUNCTION)),
 
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -171,7 +200,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
-   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,             Key_Backslash,    Key_Pipe,
+   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, OSL(ACCENTS),    Key_Backslash,    Key_Pipe,
    Key_RightControl, ___,Key_Delete , OSM(RightControl),
    ___),
 
@@ -183,9 +212,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___, ___, ___, ___,
    ___,
 
-   ___,  ___, ___, ___,   ___,        ___, ___,
-   ___,  Key_Minus,     Key_RightBracket, Key_Backtick, Key_Equals, Key_0,                   ___,
-         Key_Backslash,  ___,             ___,               ___,   Key_LeftBracket,         ___,
+   LockLayer(QWERTY),  ___, ___, ___,   ___,        ___, ___,
+   M(MACRO_ANY),  Key_Minus,     Key_RightBracket, Key_Backtick, Key_Equals, Key_0,                   ___,
+                  Key_Backslash,  ___,             ___,               ___,   Key_LeftBracket,         ___,
    ___,  ___, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), ___, ___, ___,   ___,
    ___, ___, ___, ___,
    ___),
@@ -250,8 +279,6 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   }
   return MACRO_NONE;
 }
-
-
 
 // These 'solid' color effect definitions define a rainbow of
 // LED color modes calibrated to draw 500mA or less on the
@@ -326,8 +353,8 @@ void setup() {
     &Macros,
 
     &OneShot,
-
-    // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+    
+     // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
     &MouseKeys
   );
 
