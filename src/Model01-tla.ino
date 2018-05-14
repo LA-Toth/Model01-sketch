@@ -77,6 +77,25 @@ enum { MACRO_VERSION_INFO,
        MACRO_ANY
      };
 
+// Mouse-related
+#define MW(x) Key_mouseWarp ## x
+#define MM(x) Key_mouse ## x
+#define MS(x) Key_mouseScroll ## x
+
+
+// Others
+#define KK(x) Key_Keypad ## x
+#define KC(x) Consumer_ ## x
+
+// Renames
+#define Key_Esc       Key_Escape
+#define Key_PrtScr    Key_PrintScreen
+#define Key_Ins       Key_Insert
+#define Key_Del       Key_Delete
+#define Key_PageDn    Key_PageDown
+#define Key_LArrow    Key_LeftArrow
+#define Key_RArrow    Key_RightArrow
+#define Key_DnArrow   Key_DownArrow
 
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
@@ -121,7 +140,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { MINE, DVORAK, QWERTY, NUMPAD, FUNCTION, ACCENTS }; // layers
+enum { MINE, DVORAK, NUMPAD, FUNCTION, NAV, AUX }; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement
  *   so we can make the keymaps actually resemble the physical key layout better
@@ -136,44 +155,31 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
-   OSL(FUNCTION),
+   OSL(NAV),
 
-   LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
+   LockLayer(DVORAK), Key_6, Key_7, Key_8, Key_9,         Key_0,         LockLayer(NUMPAD),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   LockLayer(QWERTY),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   OSL(AUX),      Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
-   ShiftToLayer(FUNCTION)),
+   OSL(FUNCTION)
+   ),
 
   [DVORAK] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
-   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
-   ShiftToLayer(FUNCTION),
+   Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
+   OSL(NAV),
 
-   ___,   Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
+   ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
-   OSL(ACCENTS),   Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
-   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
-   ShiftToLayer(FUNCTION)),
-
-  [QWERTY] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
-   ShiftToLayer(FUNCTION),
-
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   ___,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
-   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
-   ShiftToLayer(FUNCTION)),
+   OSL(AUX),   Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
+   OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
+   OSL(FUNCTION)
+   ),
 
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -183,29 +189,44 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___, ___, ___, ___,
    ___,
 
-   M(MACRO_VERSION_INFO),  ___, Key_Keypad7, Key_Keypad8,   Key_Keypad9,        Key_KeypadSubtract, ___,
-   ___,                    ___, Key_Keypad4, Key_Keypad5,   Key_Keypad6,        Key_KeypadAdd,      LSHIFT(Key_7),
-                           ___, Key_Keypad1, Key_Keypad2,   Key_Keypad3,        Key_Equals,         Key_Quote,
-   ___,                    ___, Key_Keypad0, Key_KeypadDot, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
+   M(MACRO_VERSION_INFO),  ___, KK(7), KK(8),   KK(8),        KK(Subtract), ___,
+   ___,                    ___, KK(4), KK(5),   KK(6),        KK(Add),      LSHIFT(Key_7),
+                           ___, KK(1), KK(2),   KK(3),        Key_Equals,   Key_Quote,
+   ___,                    ___, KK(0), KK(Dot), KK(Multiply), KK(Divide),   Key_Enter,
    ___, ___, ___, ___,
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           XXX,
-   Key_Tab,  XXX,              Key_mouseUp, XXX,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
-   Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
-   Key_End,  Key_PrintScreen,  Key_Insert,  XXX,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___,  Key_Delete, Key_Enter, ___,
+  (___,      Key_F1,      Key_F2,   Key_F3, Key_F4,   Key_F5, XXX,
+   Key_Tab,  XXX,         MM(Up),   XXX,    MM(BtnR), MW(End), MW(NE),
+   Key_Home, MM(L),       MM(Dn),   MM(R),  MM(BtnL), MW(NW),
+   Key_End,  Key_PrtScr,  Key_Ins,  XXX,    MM(BtnM), MW(SW), MW(SE),
+   ___, Key_Del, Key_Enter, ___,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
-   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, OSL(ACCENTS),    Key_Backslash,    Key_Pipe,
+   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
    Key_RightControl, ___,Key_Delete , OSM(RightControl),
    ___),
 
-   [ACCENTS] =  KEYMAP_STACKED
+  [NAV] =  KEYMAP_STACKED
+  (___,  Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, XXX,
+   XXX,  XXX,    MW(NW), MM(Up), MW(NE), MS(Up), MW(End),
+   XXX,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
+   XXX,  MS(L),  MW(SW), XXX,    MW(SE), XXX,    MM(BtnL),
+   ___, ___, ___, ___,
+   ___,
+
+   XXX,        Key_F6,     Key_F7,     Key_F8,      Key_F9,     Key_F10, Key_F11,
+   MM(BtnM),   Key_PageUp, Key_Home,   Key_UpArrow, Key_End,    XXX,     Key_F12,
+               Key_PageDn, Key_LArrow, Key_DnArrow, Key_RArrow, XXX,     XXX,
+   MM(BtnR),   XXX,        XXX,        XXX,         XXX,        XXX,     XXX,
+   ___, ___,___ , ___,
+   ___),
+
+  [AUX] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___,  ___,        ___,     Key_Semicolon,     ___, ___, ___,
    ___, Key_Quote, Key_Minus, Key_RightBracket, Key_Equals, Key_0,
@@ -213,7 +234,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___, ___, ___, ___,
    ___,
 
-   LockLayer(QWERTY),  ___, ___, ___,   ___,        ___, ___,
+   ___,  ___, ___, ___,   ___,        ___, ___,
    M(MACRO_ANY),  Key_Minus,     Key_RightBracket, Key_Backtick, Key_Equals, Key_0,                   ___,
                   Key_Backslash,  ___,             ___,               ___,   Key_LeftBracket,         ___,
    ___,  ___, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), ___, ___, ___,   ___,
