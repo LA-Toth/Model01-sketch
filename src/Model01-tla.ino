@@ -120,7 +120,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { QWERTY, NUMPAD, FUNCTION, ACCENTS }; // layers
+enum { MINE, NUMPAD, FUNCTION, ACCENTS }; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement
  *   so we can make the keymaps actually resemble the physical key layout better
@@ -129,7 +129,7 @@ enum { QWERTY, NUMPAD, FUNCTION, ACCENTS }; // layers
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
 
-  [QWERTY] = KEYMAP_STACKED
+  [MINE] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
