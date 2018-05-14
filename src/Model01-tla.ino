@@ -17,6 +17,7 @@
 #include "Kaleidoscope.h"
 
 #include "Kaleidoscope-OneShot.h"
+#include <Kaleidoscope-LED-ActiveModColor.h>
 
 // Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
@@ -353,6 +354,7 @@ void setup() {
     &Macros,
 
     &OneShot,
+    &ActiveModColorEffect,
     
      // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
     &MouseKeys
@@ -379,6 +381,8 @@ void setup() {
   // This avoids over-taxing devices that don't have a lot of power to share
   // with USB devices
   LEDOff.activate();
+
+  ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
