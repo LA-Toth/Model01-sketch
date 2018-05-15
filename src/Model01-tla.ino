@@ -96,9 +96,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
    Key_Enter,         Key_Z, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
-   OSL(AUX),          Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
+   OSL(FUNCTION),     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
    OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
-   OSL(FUNCTION)
+   OSL(AUX)
    ),
 
   [DVORAK] = KEYMAP_STACKED
@@ -112,9 +112,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
-   OSL(AUX),   Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
+   OSL(FUNCTION),  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
    OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
-   OSL(FUNCTION)
+   OSL(AUX)
    ),
 
   [NUMPAD] =  KEYMAP_STACKED
