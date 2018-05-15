@@ -68,19 +68,19 @@ enum { MACRO_VERSION_INFO,
 //
 
 /** The Model 01's key layouts are defined as 'keymaps'.
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keyboard.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_consumerctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_sysctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keymaps.h
-  *
-  */
+       https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keyboard.h
+       https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_consumerctl.h
+       https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_sysctl.h
+       https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keymaps.h
+
+*/
 
 // layers
 enum { MINE, DVORAK, NUMPAD, FUNCTION, NAV, AUX };
 
 /* This comment temporarily turns off astyle's indent enforcement
- *   so we can make the keymaps actually resemble the physical key layout better
- */
+     so we can make the keymaps actually resemble the physical key layout better
+*/
 // *INDENT-OFF*
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
@@ -201,13 +201,13 @@ static void anyKeyMacro(uint8_t keyState) {
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
 
-  case MACRO_VERSION_INFO:
-    versionInfoMacro(keyState);
-    break;
+    case MACRO_VERSION_INFO:
+      versionInfoMacro(keyState);
+      break;
 
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
-    break;
+    case MACRO_ANY:
+      anyKeyMacro(keyState);
+      break;
   }
   return MACRO_NONE;
 }
@@ -248,8 +248,8 @@ void setup() {
 
     &OneShot,
     &ActiveModColorEffect,
-    
-     // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+
+    // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
     &MouseKeys
   );
 
