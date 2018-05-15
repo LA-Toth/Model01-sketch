@@ -159,10 +159,10 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
    OSL(NAV),
 
-   LockLayer(DVORAK), Key_6, Key_7, Key_8, Key_9,         Key_0,         LockLayer(NUMPAD),
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   OSL(AUX),      Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
+   Key_Enter,         Key_Y, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
+                      Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
+   OSL(AUX),          Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
    OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
    OSL(FUNCTION)
    ),
@@ -210,7 +210,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
-   Key_RightControl, ___,Key_Delete , OSM(RightControl),
+   Key_RightControl, ___, Key_Delete , OSM(RightControl),
    ___),
 
   [NAV] =  KEYMAP_STACKED
