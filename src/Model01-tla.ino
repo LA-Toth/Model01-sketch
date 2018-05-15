@@ -97,6 +97,8 @@ enum { MACRO_VERSION_INFO,
 #define Key_RArrow    Key_RightArrow
 #define Key_DnArrow   Key_DownArrow
 
+#define Consumer_VolDec        Consumer_VolumeDecrement
+#define Consumer_VolInc        Consumer_VolumeIncrement
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
   * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
@@ -216,29 +218,29 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    XXX,  XXX,    MW(NW), MM(Up), MW(NE), MS(Up), MW(End),
    XXX,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
    XXX,  MS(L),  MW(SW), XXX,    MW(SE), XXX,    MM(BtnL),
-   ___, ___, ___, ___,
+   ___, Key_Del, Key_Enter, ___,
    ___,
 
    XXX,        Key_F6,     Key_F7,     Key_F8,      Key_F9,     Key_F10, Key_F11,
    MM(BtnM),   Key_PageUp, Key_Home,   Key_UpArrow, Key_End,    XXX,     Key_F12,
                Key_PageDn, Key_LArrow, Key_DnArrow, Key_RArrow, XXX,     XXX,
    MM(BtnR),   XXX,        XXX,        XXX,         XXX,        XXX,     XXX,
-   ___, ___,___ , ___,
+   Key_RightControl, ___, Key_Delete , OSM(RightControl),
    ___),
 
   [AUX] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___,  ___,        ___,     Key_Semicolon,     ___, ___, ___,
-   ___, Key_Quote, Key_Minus, Key_RightBracket, Key_Equals, Key_0,
-   ___, Key_Backslash, ___,    ___,          ___,        Key_LeftBracket, ___,
-   ___, ___, ___, ___,
+  (___,                   Key_F1,        Key_F2,    Key_F3,           Key_F4,     Key_F5,            KC(Mute),
+   KC(PlaySlashPause),    XXX,           XXX,       Key_Semicolon,    XXX,        XXX,              KC(VolDec),
+   KC(ScanPreviousTrack), Key_Quote,     Key_Minus, Key_RightBracket, Key_Equals, Key_0,
+   KC(ScanNextTrack),     Key_Backslash, XXX,       XXX,              XXX,        Key_LeftBracket,  KC(VolInc),
+   ___, Key_Del, Key_Enter, ___,
    ___,
 
-   ___,  ___, ___, ___,   ___,        ___, ___,
-   M(MACRO_ANY),  Key_Minus,     Key_RightBracket, Key_Backtick, Key_Equals, Key_0,                   ___,
-                  Key_Backslash,  ___,             ___,               ___,   Key_LeftBracket,         ___,
-   ___,  ___, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), ___, ___, ___,   ___,
-   ___, ___, ___, ___,
+   M(MACRO_ANY),        Key_F6,        Key_F7,                 Key_F8,       Key_F9,     Key_F10,         Key_F11,
+   KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           Key_F12,
+                        Key_Backslash, XXX,                    XXX,          XXX,        Key_LeftBracket, XXX,
+   Key_PcApplication,   XXX, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), XXX,          XXX,        OSL(FUNCTION),   XXX,
+   Key_RightControl, ___, Key_Delete , OSM(RightControl),
    ___),
 
 };
