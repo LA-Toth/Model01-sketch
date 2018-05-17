@@ -222,31 +222,31 @@ static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
-     // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
-    BootGreetingEffect,
+  // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
+  BootGreetingEffect,
 
-    // LEDControl provides support for other LED modes
-    LEDControl,
-    LEDOff,
-    LEDRainbowEffect,
-    LEDChaseEffect,
-    solidOrange, solidIndigo,
+  // LEDControl provides support for other LED modes
+  LEDControl,
+  LEDOff,
+  LEDRainbowEffect,
+  LEDChaseEffect,
+  solidOrange, solidIndigo,
 
-    // The stalker effect lights up the keys you've pressed recently
-    StalkerEffect,
+  // The stalker effect lights up the keys you've pressed recently
+  StalkerEffect,
 
-    // The numpad plugin is responsible for lighting up the 'numpad' mode
-    // with a custom LED effect
-    NumPad,
+  // The numpad plugin is responsible for lighting up the 'numpad' mode
+  // with a custom LED effect
+  NumPad,
 
-    // The macros plugin adds support for macros
-    Macros,
+  // The macros plugin adds support for macros
+  Macros,
 
-    OneShot,
-    ActiveModColorEffect,
+  OneShot,
+  ActiveModColorEffect,
 
-    // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-    MouseKeys
+  // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+  MouseKeys
 )
 
 void setup() {
