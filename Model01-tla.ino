@@ -9,6 +9,7 @@
 #include "Kaleidoscope.h"
 
 #include "Kaleidoscope-OneShot.h"
+#include "Kaleidoscope-ShapeShifter.h"
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-Macros.h"
@@ -76,7 +77,7 @@ enum { MACRO_VERSION_INFO,
 */
 
 // layers
-enum { MINE, DVORAK, NUMPAD, FUNCTION, NAV, AUX };
+enum { MINE, MINE_SHIFT, DVORAK, NUMPAD, FUNCTION, NAV, AUX };
 
 /* This comment temporarily turns off astyle's indent enforcement
      so we can make the keymaps actually resemble the physical key layout better
@@ -100,6 +101,21 @@ KEYMAPS(
    OSM(LeftAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(AUX)
    ),
+
+  [MINE_SHIFT] = KEYMAP_STACKED
+  (___, Key_6, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+        ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___),
 
   [DVORAK] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LEDEffectNext,
@@ -182,6 +198,11 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
+SHSH_LAYERS(
+  SHSH_LAYER(MINE, MINE_SHIFT),
+  SHSH_LAYER(DVORAK, MINE_SHIFT)
+);
+
 static void versionInfoMacro(uint8_t keyState) {
   if (keyToggledOn(keyState)) {
     Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
@@ -244,6 +265,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   OneShot,
   ActiveModColorEffect,
+  ShapeShifter,
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   MouseKeys
@@ -267,6 +289,7 @@ void setup() {
   LEDOff.activate();
 
   ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
+  //SHSH_USE_LAYERS();
 }
 
 void loop() {
