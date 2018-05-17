@@ -97,7 +97,7 @@ KEYMAPS(
    Key_Enter,         Key_Z, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    OSL(FUNCTION),     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
-   OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
+   OSM(LeftAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(AUX)
    ),
 
