@@ -125,7 +125,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    ___, ___, ___, ___,
    ___,
 
-   M(MACRO_VERSION_INFO),  ___, KK(7), KK(8),   KK(8),        KK(Subtract), ___,
+   M(MACRO_VERSION_INFO),  ___, KK(7), KK(8),   KK(9),        KK(Subtract), ___,
    ___,                    ___, KK(4), KK(5),   KK(6),        KK(Add),      LSHIFT(Key_7),
                            ___, KK(1), KK(2),   KK(3),        Key_Equals,   Key_Quote,
    ___,                    ___, KK(0), KK(Dot), KK(Multiply), KK(Divide),   Key_Enter,
