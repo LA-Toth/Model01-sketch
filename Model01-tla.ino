@@ -83,7 +83,7 @@ enum { MINE, DVORAK, NUMPAD, FUNCTION, NAV, AUX };
 */
 // *INDENT-OFF*
 
-const Key keymaps[][ROWS][COLS] PROGMEM = {
+KEYMAPS(
 
   [MINE] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
@@ -177,7 +177,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    Key_RightControl, ___, Key_Delete , OSM(RightControl),
    ___),
 
-};
+) // KEYMAPS()
 
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
@@ -218,40 +218,40 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
 static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 
-void setup() {
-  // First, call Kaleidoscope's internal setup function
-  Kaleidoscope.setup();
-
-  // Next, tell Kaleidoscope which plugins you want to use.
-  // The order can be important. For example, LED effects are
-  // added in the order they're listed here.
-  Kaleidoscope.use(
-    // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
-    &BootGreetingEffect,
+// First, tell Kaleidoscope which plugins you want to use.
+// The order can be important. For example, LED effects are
+// added in the order they're listed here.
+KALEIDOSCOPE_INIT_PLUGINS(
+     // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
+    BootGreetingEffect,
 
     // LEDControl provides support for other LED modes
-    &LEDControl,
-    &LEDOff,
-    &LEDRainbowEffect,
-    &LEDChaseEffect,
-    &solidOrange, &solidIndigo,
+    LEDControl,
+    LEDOff,
+    LEDRainbowEffect,
+    LEDChaseEffect,
+    solidOrange, solidIndigo,
 
     // The stalker effect lights up the keys you've pressed recently
-    &StalkerEffect,
+    StalkerEffect,
 
     // The numpad plugin is responsible for lighting up the 'numpad' mode
     // with a custom LED effect
-    &NumPad,
+    NumPad,
 
     // The macros plugin adds support for macros
-    &Macros,
+    Macros,
 
-    &OneShot,
-    &ActiveModColorEffect,
+    OneShot,
+    ActiveModColorEffect,
 
     // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-    &MouseKeys
-  );
+    MouseKeys
+)
+
+void setup() {
+  // First, call Kaleidoscope's internal setup function
+  Kaleidoscope.setup();
 
   NumPad.numPadLayer = NUMPAD;
 
