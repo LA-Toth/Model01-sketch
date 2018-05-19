@@ -160,7 +160,7 @@ KEYMAPS(
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
-   Key_RightControl, ___, Key_Delete , OSM(RightControl),
+   Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
 
   [NAV] =  KEYMAP_STACKED
@@ -175,7 +175,7 @@ KEYMAPS(
    MM(BtnM),   Key_PageUp, Key_Home,   Key_UpArrow, Key_End,    XXX,     Key_F12,
                Key_PageDn, Key_LArrow, Key_DnArrow, Key_RArrow, XXX,     XXX,
    MM(BtnR),   XXX,        XXX,        XXX,         XXX,        XXX,     XXX,
-   Key_RightControl, ___, Key_Delete , OSM(RightControl),
+   Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
 
   [AUX] =  KEYMAP_STACKED
@@ -190,7 +190,7 @@ KEYMAPS(
    KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           Key_F12,
                         Key_Backslash, XXX,                    XXX,          XXX,        Key_LeftBracket, XXX,
    Key_PcApplication,   XXX, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), XXX,          XXX,        OSL(FUNCTION),   XXX,
-   Key_RightControl, ___, Key_Delete , OSM(RightControl),
+   Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
 
 ) // KEYMAPS()
