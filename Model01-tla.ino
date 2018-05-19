@@ -188,7 +188,7 @@ KEYMAPS(
 
    M(MACRO_ANY),        Key_F6,        Key_F7,                 Key_F8,       Key_F9,     Key_F10,         Key_F11,
    KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           Key_F12,
-                        Key_Backslash, XXX,                    XXX,          XXX,        Key_LeftBracket, XXX,
+                        Key_Backslash, LALT(Key_J),            LALT(Key_I), XXX, Key_LeftBracket, XXX,
    Key_PcApplication,   XXX, LALT(LCTRL(LGUI(LSHIFT(Key_M)))), XXX,          XXX,        OSL(FUNCTION),   XXX,
    Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
