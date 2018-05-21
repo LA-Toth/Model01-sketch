@@ -90,7 +90,7 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
+   Key_LeftControl, Key_LeftAlt, OSM(LeftGui), Key_LeftShift,
    OSL(NAV),
 
    LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
@@ -121,7 +121,7 @@ KEYMAPS(
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
-   Key_LeftControl, Key_Space, Key_LeftGui, Key_LeftShift,
+   Key_LeftControl, Key_LeftAlt, OSM(LeftGui) , Key_LeftShift,
    OSL(NAV),
 
    ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
