@@ -26,9 +26,6 @@
 // when the keyboard is connected to a computer (or that computer is powered on)
 #include "Kaleidoscope-LEDEffect-BootGreeting.h"
 
-// Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
-#include "Kaleidoscope-LEDEffect-Chase.h"
-
 // Support for an LED mode that lights up the keys as you press them
 #include "Kaleidoscope-LED-Stalker.h"
 
@@ -250,7 +247,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   LEDOff,
   LEDRainbowEffect,
-  LEDChaseEffect,
   solidOrange, solidIndigo,
 
   // The stalker effect lights up the keys you've pressed recently
