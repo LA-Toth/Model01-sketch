@@ -31,7 +31,8 @@
 
 // MACRO NAMES
 enum { MACRO_VERSION_INFO,
-       MACRO_ANY
+       MACRO_ANY,
+       MACRO_CTRL_ALT_LCLICK,
      };
 
 //
@@ -63,6 +64,8 @@ enum { MACRO_VERSION_INFO,
 
 // Specific keys for my apps
 #define LAUNCHPAD     LALT(LCTRL(LGUI(LSHIFT(Key_M))))
+#define PSB           M(MACRO_CTRL_ALT_LCLICK)
+
 //
 // End of shortening and mapping
 //
@@ -165,7 +168,7 @@ KEYMAPS(
   [NAV] =  KEYMAP_STACKED
   (___,  Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, XXX,
    XXX,  XXX,    MW(NW), MM(Up), MW(NE), MS(Up), MW(End),
-   XXX,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
+   PSB,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
    XXX,  MS(L),  MW(SW), XXX,    MW(SE), XXX,    MM(BtnL),
    ___, Key_Del, Key_Enter, ___,
    ___,
@@ -228,6 +231,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     case MACRO_ANY:
       anyKeyMacro(keyState);
       break;
+
+    case MACRO_CTRL_ALT_LCLICK:
+      if (keyIsPressed(keyState)) {
+        return MACRO(D(LeftControl), D(LeftAlt), D(mouseBtnL) /*, U(LeftControl), U(LeftAlt)*/);
+      }
   }
   return MACRO_NONE;
 }
