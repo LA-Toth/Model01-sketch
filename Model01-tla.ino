@@ -6,10 +6,14 @@
 #define BUILD_INFORMATION "built by TLA"
 #endif
 
+#define WITH_SHIFT_LAYERS 0
+
 #include "Kaleidoscope.h"
 
 #include "Kaleidoscope-OneShot.h"
+#if WITH_SHIFT_LAYERS
 #include "Kaleidoscope-ShapeShifter.h"
+#endif
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-Macros.h"
@@ -79,7 +83,17 @@ enum { MACRO_VERSION_INFO,
 */
 
 // layers
-enum { MINE, MINE_SHIFT, DVORAK, NUMPAD, FUNCTION, NAV, AUX };
+enum {
+  MINE,
+#if WITH_SHIFT_LAYERS
+  MINE_SHIFT,
+#endif
+  DVORAK,
+  NUMPAD,
+  FUNCTION,
+  NAV,
+  AUX
+};
 
 /* This comment temporarily turns off astyle's indent enforcement
      so we can make the keymaps actually resemble the physical key layout better
@@ -103,9 +117,9 @@ KEYMAPS(
    OSM(LeftAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(AUX)
    ),
-
+#if WITH_SHIFT_LAYERS
   [MINE_SHIFT] = KEYMAP_STACKED
-  (___, Key_6, ___, ___, ___, ___, ___,
+  (___, Key_6, LSHIFT(LALT(Key_C)), ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
@@ -118,6 +132,7 @@ KEYMAPS(
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___,
    ___),
+#endif
 
   [DVORAK] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LEDEffectNext,
@@ -200,10 +215,12 @@ KEYMAPS(
 /* Re-enable astyle's indent enforcement */
 // *INDENT-ON*
 
+#if WITH_SHIFT_LAYERS
 SHSH_LAYERS(
   SHSH_LAYER(MINE, MINE_SHIFT),
   SHSH_LAYER(DVORAK, MINE_SHIFT)
 );
+#endif
 
 static void versionInfoMacro(uint8_t keyState) {
   if (keyToggledOn(keyState)) {
@@ -271,7 +288,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   OneShot,
   ActiveModColorEffect,
+#if WITH_SHIFT_LAYERS
   ShapeShifter,
+#endif
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   MouseKeys
@@ -295,7 +314,9 @@ void setup() {
   LEDOff.activate();
 
   ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
+#if WITH_SHIFT_LAYERS
   //SHSH_USE_LAYERS();
+#endif
 }
 
 void loop() {
