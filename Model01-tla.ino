@@ -106,7 +106,7 @@ enum {
 KEYMAPS(
 
   [MINE] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_6,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
@@ -138,7 +138,7 @@ KEYMAPS(
 #endif
 
   [DVORAK] = KEYMAP_STACKED
-  (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LEDEffectNext,
+  (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_6,
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
@@ -184,7 +184,7 @@ KEYMAPS(
    ___),
 
   [NAV] =  KEYMAP_STACKED
-  (___,  Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, XXX,
+  (___,  Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_LEDEffectNext,
    XXX,  XXX,    MW(NW), MM(Up), MW(NE), MS(Up), MW(End),
    PSB,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
    XXX,  MS(L),  MW(SW), XXX,    MW(SE), XXX,    MM(BtnL),
