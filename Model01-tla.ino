@@ -199,16 +199,15 @@ KEYMAPS(
    ___),
 
   [AUX] =  KEYMAP_STACKED
-  (___,                   Key_F1,        Key_F2,    Key_F3,           Key_F4,     Key_F5,            KC(Mute),
+  (___,                   Key_F11,       Key_F12,   Key_F13,          Key_F14,    Key_F15,          KC(Mute),
    KC(PlaySlashPause),    XXX,           XXX,       Key_Semicolon,    XXX,        XXX,              KC(VolDec),
    KC(ScanPreviousTrack), Key_Quote,     Key_Minus, Key_RightBracket, Key_Equals, Key_0,
    KC(ScanNextTrack),     Key_Backslash, XXX,       XXX,              INS_NOFMT,  Key_LeftBracket,  KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   M(MACRO_ANY),        Key_F6,        Key_F7,                 Key_F8,       Key_F9,     Key_F10,         Key_F11,
-   KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           Key_F12,
-                        Key_Backslash, LALT(Key_J),            LALT(Key_I),  XXX,        Key_LeftBracket, XXX,
+   M(MACRO_ANY),        Key_F16,       Key_F17,                Key_F18,      Key_F19,    Key_F20,         XXX,
+   KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           XXX,
    Key_PcApplication,   XXX,           LAUNCHPAD,              XXX,          XXX,        OSL(FUNCTION),   XXX,
    Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
