@@ -117,12 +117,12 @@ KEYMAPS(
    Key_Enter,         Key_Y, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    OSL(FUNCTION),     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
-   OSM(LeftAlt), OSM(RightShift), Key_Space, Key_Backspace,
+   OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(AUX)
    ),
 #if WITH_SHIFT_LAYERS
   [MINE_SHIFT] = KEYMAP_STACKED
-  (___, Key_6, LSHIFT(LALT(Key_C)), ___, ___, ___, ___,
+  (___, Key_6, LSHIFT(RALT(Key_C)), ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
@@ -149,7 +149,7 @@ KEYMAPS(
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    OSL(FUNCTION),  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
-   OSM(RightShift), Key_LeftAlt, Key_Space, Key_Backspace,
+   OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(AUX)
    ),
 
@@ -208,6 +208,7 @@ KEYMAPS(
 
    M(MACRO_ANY),        Key_F16,       Key_F17,                Key_F18,      Key_F19,    Key_F20,         XXX,
    KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           XXX,
+                        Key_Backslash, RALT(Key_J),            RALT(Key_I),  XXX,        Key_LeftBracket, XXX,
    Key_PcApplication,   XXX,           LAUNCHPAD,              XXX,          XXX,        OSL(FUNCTION),   XXX,
    Key_RightControl, OSM(LeftAlt), Key_Delete , OSM(RightControl),
    ___),
