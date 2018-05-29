@@ -24,7 +24,6 @@
 
 #include "LED-Off.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
-#include "Kaleidoscope-LEDEffect-Rainbow.h"
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
@@ -263,8 +262,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // These 'solid' color effect definitions define a rainbow of
 // LED color modes calibrated to draw 500mA or less on the
 // Keyboardio Model 01.
-static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
-static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
+static kaleidoscope::LEDSolidColor solidColor(90, 30, 10);
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
    and turns them back on when it wakes up.
@@ -303,8 +301,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDControl provides support for other LED modes
   LEDControl,
   LEDOff,
-  LEDRainbowEffect,
-  solidOrange, solidIndigo,
+  solidColor,
 
   // The stalker effect lights up the keys you've pressed recently
   StalkerEffect,
@@ -335,10 +332,6 @@ void setup() {
   Kaleidoscope.setup();
 
   NumPad.numPadLayer = NUMPAD;
-
-  // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
-  // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(150);
 
   StalkerEffect.variant = STALKER(BlazingTrail);
 
