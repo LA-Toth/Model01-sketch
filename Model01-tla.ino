@@ -33,6 +33,9 @@
 // Support for an LED mode that lights up the keys as you press them
 #include "Kaleidoscope-LED-Stalker.h"
 
+// Support for host power management (suspend & wakeup)
+#include "Kaleidoscope-HostPowerManagement.h"
+
 // MACRO NAMES
 enum { MACRO_VERSION_INFO,
        MACRO_ANY,
@@ -263,6 +266,33 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
 static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
 
+/** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
+   and turns them back on when it wakes up.
+*/
+void toggleLedsOnSuspendResume(kaleidoscope::HostPowerManagement::Event event) {
+  switch (event) {
+    case kaleidoscope::HostPowerManagement::Suspend:
+      LEDControl.paused = true;
+      LEDControl.set_all_leds_to({0, 0, 0});
+      LEDControl.syncLeds();
+      break;
+    case kaleidoscope::HostPowerManagement::Resume:
+      LEDControl.paused = false;
+      LEDControl.refreshAll();
+      break;
+    case kaleidoscope::HostPowerManagement::Sleep:
+      break;
+  }
+}
+
+/** hostPowerManagementEventHandler dispatches power management events (suspend,
+   resume, and sleep) to other functions that perform action based on these
+   events.
+*/
+void hostPowerManagementEventHandler(kaleidoscope::HostPowerManagement::Event event) {
+  toggleLedsOnSuspendResume(event);
+}
+
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -292,6 +322,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   ShapeShifter,
 #endif
 
+  // The HostPowerManagement plugin enables waking up the host from suspend,
+  // and allows us to turn LEDs off when it goes to sleep.
+  HostPowerManagement,
+
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   MouseKeys
 )
@@ -307,6 +341,9 @@ void setup() {
   LEDRainbowEffect.brightness(150);
 
   StalkerEffect.variant = STALKER(BlazingTrail);
+
+  // We want the keyboard to be able to wake the host up from suspend.
+  HostPowerManagement.enableWakeup();
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
