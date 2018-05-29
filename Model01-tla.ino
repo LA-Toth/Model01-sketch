@@ -71,6 +71,7 @@ enum { MACRO_VERSION_INFO,
 // Specific keys for my apps
 #define LAUNCHPAD     LALT(LCTRL(LGUI(LSHIFT(Key_M))))
 #define PSB           M(MACRO_CTRL_ALT_LCLICK)
+#define INS_NOFMT     LALT(LGUI(LSHIFT(Key_V)))
 
 //
 // End of shortening and mapping
@@ -201,7 +202,7 @@ KEYMAPS(
   (___,                   Key_F1,        Key_F2,    Key_F3,           Key_F4,     Key_F5,            KC(Mute),
    KC(PlaySlashPause),    XXX,           XXX,       Key_Semicolon,    XXX,        XXX,              KC(VolDec),
    KC(ScanPreviousTrack), Key_Quote,     Key_Minus, Key_RightBracket, Key_Equals, Key_0,
-   KC(ScanNextTrack),     Key_Backslash, XXX,       XXX,              XXX,        Key_LeftBracket,  KC(VolInc),
+   KC(ScanNextTrack),     Key_Backslash, XXX,       XXX,              INS_NOFMT,  Key_LeftBracket,  KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
