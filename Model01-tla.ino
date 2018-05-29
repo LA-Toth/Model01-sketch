@@ -346,7 +346,7 @@ void setup() {
 
   ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
 #if WITH_SHIFT_LAYERS
-  //SHSH_USE_LAYERS();
+  SHSH_USE_LAYERS();
 #endif
 }
 
