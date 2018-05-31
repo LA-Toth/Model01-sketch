@@ -7,6 +7,7 @@
 #endif
 
 #define WITH_SHIFT_LAYERS 0
+#define WITH_ACTIVE_MODE_LED 0
 
 #include "Kaleidoscope.h"
 
@@ -14,7 +15,9 @@
 #if WITH_SHIFT_LAYERS
 #include "Kaleidoscope-ShapeShifter.h"
 #endif
+#if WITH_ACTIVE_MODE_LED
 #include <Kaleidoscope-LED-ActiveModColor.h>
+#endif
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-LEDControl.h"
@@ -28,9 +31,6 @@
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
 #include "Kaleidoscope-LEDEffect-BootGreeting.h"
-
-// Support for an LED mode that lights up the keys as you press them
-#include "Kaleidoscope-LED-Stalker.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -320,9 +320,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDOff,
   solidColor,
 
-  // The stalker effect lights up the keys you've pressed recently
-  StalkerEffect,
-
   // The numpad plugin is responsible for lighting up the 'numpad' mode
   // with a custom LED effect
   NumPad,
@@ -331,7 +328,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Macros,
 
   OneShot,
+#if WITH_ACTIVE_MODE_LED
   ActiveModColorEffect,
+#endif
 #if WITH_SHIFT_LAYERS
   ShapeShifter,
 #endif
@@ -350,8 +349,6 @@ void setup() {
 
   NumPad.numPadLayer = NUMPAD;
 
-  StalkerEffect.variant = STALKER(BlazingTrail);
-
   // We want the keyboard to be able to wake the host up from suspend.
   HostPowerManagement.enableWakeup();
 
@@ -360,7 +357,9 @@ void setup() {
   // with USB devices
   LEDOff.activate();
 
+#if WITH_ACTIVE_MODE_LED
   ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
+#endif
 #if WITH_SHIFT_LAYERS
   SHSH_USE_LAYERS();
 #endif
