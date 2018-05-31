@@ -64,9 +64,25 @@ enum { MACRO_VERSION_INFO,
 #define Key_LArrow    Key_LeftArrow
 #define Key_RArrow    Key_RightArrow
 #define Key_DnArrow   Key_DownArrow
+#define Key_BSl       Key_Backslash
 
 #define Consumer_VolDec        Consumer_VolumeDecrement
 #define Consumer_VolInc        Consumer_VolumeIncrement
+
+// accents
+// ..A: acute
+// ..U: umlaut
+// ..DA: double acute
+// KH..: Hungarian Key
+#define KH_AA  RALT(Key_A)
+#define KH_EA  RALT(Key_S)
+#define KH_IA  RALT(Key_Q)
+#define KH_OA  RALT(Key_L)
+#define KH_UA  RALT(Key_H)
+#define KH_OU  RALT(Key_T)
+#define KH_UU  RALT(Key_Quote)
+#define KH_ODA RALT(Key_J)
+#define KH_UDA RALT(Key_F)
 
 // Specific keys for my apps
 #define LAUNCHPAD     LALT(LCTRL(LGUI(LSHIFT(Key_M))))
@@ -199,17 +215,17 @@ KEYMAPS(
    ___),
 
   [AUX] =  KEYMAP_STACKED
-  (___,                   Key_F11,       Key_F12,   Key_F13,          Key_F14,    Key_F15,          KC(Mute),
-   KC(PlaySlashPause),    XXX,           XXX,       Key_Semicolon,    XXX,        XXX,              KC(VolDec),
-   KC(ScanPreviousTrack), Key_Quote,     Key_Minus, Key_RightBracket, Key_Equals, Key_0,
-   KC(ScanNextTrack),     Key_Backslash, XXX,       XXX,              INS_NOFMT,  Key_LeftBracket,  KC(VolInc),
+  (___,                   Key_F11, Key_F12, Key_F13,  Key_F14,    Key_F15,          KC(Mute),
+   KC(PlaySlashPause),    XXX,     XXX,     KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
+   KC(ScanPreviousTrack), KH_AA,   XXX,     XXX,      XXX,        Key_LeftBracket, 
+   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   M(MACRO_ANY),        Key_F16,       Key_F17,                Key_F18,      Key_F19,    Key_F20,         XXX,
-   KC(PlaySlashPause),  Key_Minus,     Key_RightBracket,       Key_Backtick, Key_Equals, Key_0,           XXX,
-                        Key_Backslash, RALT(Key_J),            RALT(Key_I),  XXX,        Key_LeftBracket, XXX,
-   Key_PcApplication,   XXX,           LAUNCHPAD,              XXX,          XXX,        OSL(FUNCTION),   XXX,
+   M(MACRO_ANY),        Key_F16,   Key_F17,   Key_F18,  Key_F19,  Key_F20,    XXX,
+   KC(PlaySlashPause),  KH_UU,     KH_UA,     KH_IA,    KH_OA,    KH_OU,      XXX,
+                        KH_UDA,    KH_AA,     KH_EA,    XXX,      KH_ODA,     XXX,
+   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      XXX,
    Key_RightControl, OSM(LeftAlt), Key_Enter, ___,
    ___),
 
