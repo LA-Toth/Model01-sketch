@@ -7,7 +7,7 @@
 #endif
 
 #define WITH_SHIFT_LAYERS 0
-#define WITH_ACTIVE_MODE_LED 0
+#define WITH_ACTIVE_MODE_LED 1
 
 #include "Kaleidoscope.h"
 
