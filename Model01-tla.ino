@@ -55,6 +55,25 @@ enum { MACRO_VERSION_INFO,
 #define KK(x) Key_Keypad ## x
 #define KC(x) Consumer_ ## x
 
+//
+// FN layers and the function keys
+//
+// map the two fn keys to specific layer - it might be changed here
+#define LFN           NAV
+#define RFN           AUX
+// function keys
+#define KFX(x)        Key_F ## x
+#define Key_F110      Key_F20
+// LFN must belong to F1..F10 and RFN to F11..F20
+// KFX0 is for 1..10 and KFX1 is for offset by 10, 11..20
+#define KFX0(x)       KFX(x)
+#define KFX1(x)       KFX(1 ## x)
+// AUX layer's Fx keys are KAFX
+// NAV layer's Fx keys are KNFX
+#define KAFX(x)       KFX1(x)
+#define KNFX(x)       KFX0(x)
+
+
 // Renames
 #define Key_Esc       Key_Escape
 #define Key_PrtScr    Key_PrintScreen
@@ -68,6 +87,7 @@ enum { MACRO_VERSION_INFO,
 
 #define Consumer_VolDec        Consumer_VolumeDecrement
 #define Consumer_VolInc        Consumer_VolumeIncrement
+
 
 // accents
 // ..A: acute
@@ -127,14 +147,14 @@ KEYMAPS(
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_LeftControl, Key_Backspace, OSM(LeftGui), Key_LeftShift,
-   OSL(NAV),
+   OSL(LFN),
 
    LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
    Key_Enter,         Key_Z, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    OSL(FUNCTION),     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
-   OSL(AUX)
+   OSL(RFN)
    ),
 #if WITH_SHIFT_LAYERS
   [MINE_SHIFT] = KEYMAP_STACKED
@@ -159,14 +179,14 @@ KEYMAPS(
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
    Key_LeftControl, Key_Backspace, OSM(LeftGui), Key_LeftShift,
-   OSL(NAV),
+   OSL(LFN),
 
    ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    OSL(FUNCTION),  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
-   OSL(AUX)
+   OSL(RFN)
    ),
 
   [NUMPAD] =  KEYMAP_STACKED
@@ -200,29 +220,29 @@ KEYMAPS(
    ___),
 
   [NAV] =  KEYMAP_STACKED
-  (___,  Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_LEDEffectNext,
-   XXX,  XXX,    MW(NW), MM(Up), MW(NE), MS(Up), MW(End),
-   PSB,  MS(R),  MM(L),  MM(Dn), MM(R),  MS(Dn),
-   XXX,  MS(L),  MW(SW), XXX,    MW(SE), XXX,    MM(BtnL),
+  (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  Key_LEDEffectNext,
+   XXX,  XXX,      MW(NW),   MM(Up),   MW(NE),   MS(Up),   MW(End),
+   PSB,  MS(R),    MM(L),    MM(Dn),   MM(R),    MS(Dn),
+   XXX,  MS(L),    MW(SW),   XXX,      MW(SE),   XXX,      MM(BtnL),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   XXX,        Key_F6,     Key_F7,     Key_F8,      Key_F9,     Key_F10, Key_F11,
-   MM(BtnM),   Key_PageUp, Key_Home,   Key_UpArrow, Key_End,    XXX,     Key_F12,
-               Key_PageDn, Key_LArrow, Key_DnArrow, Key_RArrow, XXX,     XXX,
-   MM(BtnR),   XXX,        XXX,        XXX,         XXX,        XXX,     XXX,
+   XXX,        KNFX(6),     KNFX(7),     KNFX(8),      KNFX(9),     KNFX(10),  Key_F11,
+   MM(BtnM),   Key_PageUp,  Key_Home,    Key_UpArrow,  Key_End,     XXX,       Key_F12,
+               Key_PageDn,  Key_LArrow,  Key_DnArrow,  Key_RArrow,  XXX,       XXX,
+   MM(BtnR),   XXX,         XXX,         XXX,          XXX,         XXX,       XXX,
    ___, OSM(LeftAlt), Key_Enter, ___,
    ___),
 
   [AUX] =  KEYMAP_STACKED
-  (___,                   Key_F11, Key_F12, Key_F13,  Key_F14,    Key_F15,          KC(Mute),
+  (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
    KC(PlaySlashPause),    XXX,     KH_UDA,  KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
    KC(ScanPreviousTrack), KH_AA,   KH_UU,   KH_ODA,   KH_OU,      Key_LeftBracket,
    KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   M(MACRO_ANY),        Key_F16,   Key_F17,   Key_F18,  Key_F19,  Key_F20,    XXX,
+   M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KAFX(10),   XXX,
    KC(PlaySlashPause),  XXX,       KH_UA,     KH_IA,    KH_OA,    XXX,        XXX,
                         XXX,       KH_UA,     KH_IA,    KH_OA,    KH_EA,      XXX,
    Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      XXX,
