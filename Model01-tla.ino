@@ -223,8 +223,8 @@ KEYMAPS(
    ___,
 
    M(MACRO_ANY),        Key_F16,   Key_F17,   Key_F18,  Key_F19,  Key_F20,    XXX,
-   KC(PlaySlashPause),  KH_UU,     KH_UA,     KH_IA,    KH_OA,    KH_OU,      XXX,
-                        KH_UDA,    KH_UA,     KH_IA,    KH_OA,    KH_ODA,     XXX,
+   KC(PlaySlashPause),  XXX,       KH_UA,     KH_IA,    KH_OA,    XXX,        XXX,
+                        XXX,       KH_UA,     KH_IA,    KH_OA,    KH_EA,      XXX,
    Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      XXX,
    ___, OSM(LeftAlt), Key_Enter, ___,
    ___),
