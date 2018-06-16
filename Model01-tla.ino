@@ -196,7 +196,7 @@ KEYMAPS(
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
-   Key_RightControl, OSM(LeftAlt), Key_Enter, ___,
+   ___, OSM(LeftAlt), Key_Enter, ___,
    ___),
 
   [NAV] =  KEYMAP_STACKED
@@ -211,7 +211,7 @@ KEYMAPS(
    MM(BtnM),   Key_PageUp, Key_Home,   Key_UpArrow, Key_End,    XXX,     Key_F12,
                Key_PageDn, Key_LArrow, Key_DnArrow, Key_RArrow, XXX,     XXX,
    MM(BtnR),   XXX,        XXX,        XXX,         XXX,        XXX,     XXX,
-   Key_RightControl, OSM(LeftAlt), Key_Enter, ___,
+   ___, OSM(LeftAlt), Key_Enter, ___,
    ___),
 
   [AUX] =  KEYMAP_STACKED
@@ -226,7 +226,7 @@ KEYMAPS(
    KC(PlaySlashPause),  KH_UU,     KH_UA,     KH_IA,    KH_OA,    KH_OU,      XXX,
                         KH_UDA,    KH_UA,     KH_IA,    KH_OA,    KH_ODA,     XXX,
    Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      XXX,
-   Key_RightControl, OSM(LeftAlt), Key_Enter, ___,
+   ___, OSM(LeftAlt), Key_Enter, ___,
    ___),
 
 ) // KEYMAPS()
