@@ -8,6 +8,7 @@
 
 #define WITH_SHIFT_LAYERS 0
 #define WITH_ACTIVE_MODE_LED 1
+#define WITH_FN_LAYER 0
 
 #include "Kaleidoscope.h"
 
@@ -88,6 +89,11 @@ enum { MACRO_VERSION_INFO,
 #define Consumer_VolDec        Consumer_VolumeDecrement
 #define Consumer_VolInc        Consumer_VolumeIncrement
 
+#if WITH_FN_LAYER
+#define Key_BUTTERFLY     OSL(FUNCTION)
+#else
+#define Key_BUTTERFLY     Key_Enter
+#endif
 
 // accents
 // ..A: acute
@@ -129,7 +135,9 @@ enum {
 #endif
   DVORAK,
   NUMPAD,
+#if WITH_FN_LAYER
   FUNCTION,
+#endif
   NAV,
   AUX
 };
@@ -152,7 +160,7 @@ KEYMAPS(
    LockLayer(DVORAK), Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
    Key_Enter,         Key_Z, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
-   OSL(FUNCTION),     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
+   Key_BUTTERFLY,     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(RFN)
    ),
@@ -184,7 +192,7 @@ KEYMAPS(
    ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
-   OSL(FUNCTION),  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
+   Key_BUTTERFLY,  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(RFN)
    ),
@@ -204,6 +212,7 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___),
 
+#if WITH_FN_LAYER
   [FUNCTION] =  KEYMAP_STACKED
   (___,      Key_F1,      Key_F2,   Key_F3, Key_F4,   Key_F5, XXX,
    Key_Tab,  XXX,         MM(Up),   XXX,    MM(BtnR), MW(End), MW(NE),
@@ -218,6 +227,7 @@ KEYMAPS(
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
    ___, OSM(LeftAlt), Key_Enter, Key_Del,
    ___),
+#endif
 
   [NAV] =  KEYMAP_STACKED
   (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  Key_LEDEffectNext,
