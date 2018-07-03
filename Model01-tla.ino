@@ -92,7 +92,7 @@ enum { MACRO_VERSION_INFO,
 #if WITH_FN_LAYER
 #define Key_BUTTERFLY     OSL(FUNCTION)
 #else
-#define Key_BUTTERFLY     Key_Enter
+#define Key_BUTTERFLY     Key_PcApplication
 #endif
 
 // accents
@@ -114,6 +114,7 @@ enum { MACRO_VERSION_INFO,
 #define LAUNCHPAD     LALT(LCTRL(LGUI(LSHIFT(Key_M))))
 #define PSB           M(MACRO_CTRL_ALT_LCLICK)
 #define INS_NOFMT     LALT(LGUI(LSHIFT(Key_V)))
+#define LOCK          LCTRL(LGUI(Key_Q))
 
 //
 // End of shortening and mapping
@@ -255,7 +256,7 @@ KEYMAPS(
    M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KAFX(10),   XXX,
    KC(PlaySlashPause),  XXX,       KH_UA,     KH_IA,    KH_OA,    XXX,        XXX,
                         XXX,       KH_UA,     KH_IA,    KH_OA,    KH_EA,      XXX,
-   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      XXX,
+   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      LOCK,
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
