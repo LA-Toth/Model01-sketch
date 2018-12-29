@@ -143,7 +143,8 @@ enum {
   FUNCTION,
 #endif
   NAV,
-  AUX
+  AUX,
+  AUX2, // close to original Hungarian layout
 };
 
 /* This comment temporarily turns off astyle's indent enforcement
@@ -158,7 +159,7 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, KPcApp, OSM(LeftGui), Key_LeftShift,
+   Key_LeftControl, OSL(AUX2), OSM(LeftGui), Key_LeftShift,
    OSL(LFN),
 
    Key_RightBracket,  Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
@@ -260,6 +261,21 @@ KEYMAPS(
    KC(PlaySlashPause),  XXX,       KH_UA,     KH_IA,    KH_OA,    XXX,        XXX,
                         XXX,       KH_UA,     KH_IA,    KH_OA,    KH_EA,      XXX,
    Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      LOCK,
+   ___, OSM(LeftAlt), ___, Key_Del,
+   ___),
+
+   [AUX2] =  KEYMAP_STACKED
+  (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
+   KC(PlaySlashPause),    XXX,     KH_UDA,  KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
+   KC(ScanPreviousTrack), KH_AA,   KH_UU,   KH_ODA,   KH_OU,      Key_LeftBracket,
+   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
+   ___, Key_Del, Key_Enter, ___,
+   ___,
+
+   M(MACRO_ANY),        KAFX(6),   KAFX(7),   XXX,      XXX,      KH_OU,       KH_UU,
+   KC(PlaySlashPause),  KH_UDA,    KH_UA,     KH_IA,    KH_OA,    KH_UDA,      KH_ODA,
+                        KH_UDA,    XXX,       XXX,      KH_EA,    KH_EA,       KH_AA,
+   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_UDA,      LOCK,
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
