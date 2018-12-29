@@ -6,16 +6,11 @@
 #define BUILD_INFORMATION "built by TLA"
 #endif
 
-#define WITH_SHIFT_LAYERS 0
 #define WITH_ACTIVE_MODE_LED 1
-#define WITH_FN_LAYER 0
 
 #include "Kaleidoscope.h"
 
 #include "Kaleidoscope-OneShot.h"
-#if WITH_SHIFT_LAYERS
-#include "Kaleidoscope-ShapeShifter.h"
-#endif
 #if WITH_ACTIVE_MODE_LED
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #endif
@@ -62,6 +57,7 @@ enum { MACRO_VERSION_INFO,
 // map the two fn keys to specific layer - it might be changed here
 #define LFN           NAV
 #define RFN           AUX
+
 // function keys
 #define KFX(x)        Key_F ## x
 #define Key_F110      Key_F20
@@ -92,11 +88,7 @@ enum { MACRO_VERSION_INFO,
 #define Consumer_VolDec        Consumer_VolumeDecrement
 #define Consumer_VolInc        Consumer_VolumeIncrement
 
-#if WITH_FN_LAYER
-#define Key_BUTTERFLY     OSL(FUNCTION)
-#else
 #define Key_BUTTERFLY     Key_BSl
-#endif
 
 // accents
 // ..A: acute
@@ -134,17 +126,10 @@ enum { MACRO_VERSION_INFO,
 // layers
 enum {
   MINE,
-#if WITH_SHIFT_LAYERS
-  MINE_SHIFT,
-#endif
   DVORAK,
   NUMPAD,
-#if WITH_FN_LAYER
-  FUNCTION,
-#endif
   NAV,
-  AUX,
-  AUX2, // close to original Hungarian layout
+  AUX, // close to original Hungarian layout
 };
 
 /* This comment temporarily turns off astyle's indent enforcement
@@ -159,7 +144,7 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, OSL(AUX2), OSM(LeftGui), Key_LeftShift,
+   Key_LeftControl, OSL(AUX), OSM(LeftGui), Key_LeftShift,
    OSL(LFN),
 
    Key_RightBracket,  Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
@@ -169,22 +154,6 @@ KEYMAPS(
    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
    OSL(RFN)
    ),
-#if WITH_SHIFT_LAYERS
-  [MINE_SHIFT] = KEYMAP_STACKED
-  (___, Key_6, LSHIFT(RALT(Key_C)), ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___,
-   ___,
-
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-        ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___,
-   ___),
-#endif
 
   [DVORAK] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LeftBracket,
@@ -217,23 +186,6 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___),
 
-#if WITH_FN_LAYER
-  [FUNCTION] =  KEYMAP_STACKED
-  (___,      Key_F1,      Key_F2,   Key_F3, Key_F4,   Key_F5, XXX,
-   Key_Tab,  XXX,         MM(Up),   XXX,    MM(BtnR), MW(End), MW(NE),
-   Key_Home, MM(L),       MM(Dn),   MM(R),  MM(BtnL), MW(NW),
-   Key_End,  Key_PrtScr,  Key_Ins,  XXX,    MM(BtnM), MW(SW), MW(SE),
-   ___, Key_Del, Key_Enter, ___,
-   ___,
-
-   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
-   Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  XXX,              XXX,
-   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,    Key_Backslash,    Key_Pipe,
-   ___, OSM(LeftAlt), ___, Key_Del,
-   ___),
-#endif
-
   [NAV] =  KEYMAP_STACKED
   (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  Key_LEDEffectNext,
    XXX,  XXX,      MW(NW),   MM(Up),   MW(NE),   MS(Up),   MW(End),
@@ -249,22 +201,7 @@ KEYMAPS(
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
-  [AUX] =  KEYMAP_STACKED
-  (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
-   KC(PlaySlashPause),    XXX,     KH_UDA,  KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
-   KC(ScanPreviousTrack), KH_AA,   KH_UU,   KH_ODA,   KH_OU,      Key_LeftBracket,
-   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
-   ___, Key_Del, Key_Enter, ___,
-   ___,
-
-   M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KAFX(10),   XXX,
-   KC(PlaySlashPause),  XXX,       KH_UA,     KH_IA,    KH_OA,    XXX,        XXX,
-                        XXX,       KH_UA,     KH_IA,    KH_OA,    KH_EA,      XXX,
-   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_OU,      LOCK,
-   ___, OSM(LeftAlt), ___, Key_Del,
-   ___),
-
-   [AUX2] =  KEYMAP_STACKED
+   [AUX] =  KEYMAP_STACKED
   (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
    KC(PlaySlashPause),    XXX,     KH_UDA,  KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
    KC(ScanPreviousTrack), KH_AA,   KH_UU,   KH_ODA,   KH_OU,      Key_LeftBracket,
@@ -380,9 +317,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   OneShot,
 #if WITH_ACTIVE_MODE_LED
   ActiveModColorEffect,
-#endif
-#if WITH_SHIFT_LAYERS
-  ShapeShifter,
 #endif
 
   // The HostPowerManagement plugin enables waking up the host from suspend,
