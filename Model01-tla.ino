@@ -130,6 +130,7 @@ enum {
   NUMPAD,
   NAV,
   AUX, // close to original Hungarian layout
+  RSIDE, // One side only to work with other input devices
 };
 
 /* This comment temporarily turns off astyle's indent enforcement
@@ -144,7 +145,7 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, OSL(AUX), OSM(LeftGui), Key_LeftShift,
+   Key_LeftControl, OSL(RSIDE), OSM(LeftGui), Key_LeftShift,
    OSL(LFN),
 
    Key_RightBracket,  Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
@@ -189,7 +190,7 @@ KEYMAPS(
   [NAV] =  KEYMAP_STACKED
   (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  Key_LEDEffectNext,
    XXX,  XXX,      MW(NW),   MM(Up),   MW(NE),   MS(Up),   MW(End),
-   PSB,  MS(R),    MM(L),    MM(Dn),   MM(R),    MS(Dn),
+   ___,  MS(R),    MM(L),    MM(Dn),   MM(R),    MS(Dn),
    XXX,  MS(L),    MW(SW),   XXX,      MW(SE),   XXX,      MM(BtnL),
    ___, Key_Del, Key_Enter, ___,
    ___,
@@ -209,13 +210,27 @@ KEYMAPS(
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   M(MACRO_ANY),        KAFX(6),   KAFX(7),   XXX,      XXX,      KH_OU,       KH_UU,
+   M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KH_OU,       KH_UU,
    KC(PlaySlashPause),  KH_UDA,    KH_UA,     KH_IA,    KH_OA,    KH_UDA,      KH_ODA,
                         KH_UDA,    XXX,       XXX,      KH_EA,    KH_EA,       KH_AA,
    Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_UDA,      LOCK,
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
+  [RSIDE] = KEYMAP_STACKED
+  (___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___, ___, ___, ___, ___, ___, ___,
+   Key_Enter, ___,    Key_E, ___, ___, ___, ___,
+               Key_L, Key_I, Key_Y, ___, ___, ___,
+   Key_Space,  Key_W, Key_B, Key_S, Key_M, ___, ___,
+   Key_RightGui, Key_RightShift, Key_RightAlt, Key_RightControl,
+   ___),
 ) // KEYMAPS()
 
 /* Re-enable astyle's indent enforcement */
