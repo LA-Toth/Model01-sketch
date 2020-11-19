@@ -134,7 +134,9 @@ enum { MACRO_VERSION_INFO,
 
 // The CTRL to SHIFT and SHIFT to CTRL
 #define LEFT_4_KEYS     Key_CLeftCtrl, Key_LeftAlt , Key_CLeftGui, Key_LeftShift
-#define RIGHT_4_KEYS    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace
+#define RIGHT_4_KEYS    Key_Backspace, OSM(RightShift), Key_Space, XXX
+// NOTE: my right "Ctrl" key switch is faulty as of now, I ignore the key
+// and map to another key
 
 //
 // End of shortening and mapping
