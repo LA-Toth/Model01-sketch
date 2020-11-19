@@ -7,6 +7,7 @@
 #endif
 
 #define WITH_ACTIVE_MODE_LED 1
+#define CHANGE_CTRL_AND_CMD_KEYS 0
 
 #include "Kaleidoscope.h"
 
@@ -21,7 +22,7 @@
 // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
 #include "Kaleidoscope-NumPad.h"
 
-#include "LED-Off.h"
+//#include "LED-Off.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
@@ -35,6 +36,9 @@
 enum { MACRO_VERSION_INFO,
        MACRO_ANY,
        MACRO_CTRL_ALT_LCLICK,
+       MACRO_SWITCH_ZY,
+       MACRO_PRESS_Z,
+       MACRO_PRESS_Y,
      };
 
 //
@@ -84,6 +88,9 @@ enum { MACRO_VERSION_INFO,
 #define KPcApp        Key_PcApplication
 #define Key_RBracket  Key_RightBracket
 #define Key_RBracket  Key_RightBracket
+#define Key_Led       Key_LEDEffectNext
+#define KM_Z          M(MACRO_PRESS_Z)
+#define KM_Y          M(MACRO_PRESS_Y)
 
 #define Consumer_VolDec        Consumer_VolumeDecrement
 #define Consumer_VolInc        Consumer_VolumeIncrement
@@ -110,6 +117,24 @@ enum { MACRO_VERSION_INFO,
 #define PSB           M(MACRO_CTRL_ALT_LCLICK)
 #define INS_NOFMT     LALT(LGUI(LSHIFT(Key_V)))
 #define LOCK          LCTRL(LGUI(Key_Q))
+#define ASL           LALT(LSHIFT(Key_L))
+#define CCF9          LCTRL(LGUI(Key_F9))
+
+// Windows
+#define WPD           LCTRL(LGUI(Key_LArrow))
+#define WND           LCTRL(LGUI(Key_RArrow))
+
+#if CHANGE_CTRL_AND_CMD_KEYS
+#define Key_CLeftGui    Key_LeftControl
+#define Key_CLeftCtrl   Key_LeftGui
+#else
+#define Key_CLeftGui    Key_LeftGui
+#define Key_CLeftCtrl   Key_LeftControl
+#endif
+
+// The CTRL to SHIFT and SHIFT to CTRL
+#define LEFT_4_KEYS     Key_CLeftCtrl, Key_LeftAlt , Key_CLeftGui, Key_LeftShift
+#define RIGHT_4_KEYS    OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace
 
 //
 // End of shortening and mapping
@@ -122,6 +147,10 @@ enum { MACRO_VERSION_INFO,
        https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keymaps.h
 
 */
+
+
+// switch Key_Y and Key_Z
+bool switch_z_y = true;
 
 // layers
 enum {
@@ -141,36 +170,54 @@ enum {
 KEYMAPS(
 
   [MINE] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
+  (OSL(DVORAK),  Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, OSL(RSIDE), OSM(LeftGui), Key_LeftShift,
+   LEFT_4_KEYS,
    OSL(LFN),
 
    Key_RightBracket,  Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
    Key_Enter,         Key_Z, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    Key_BUTTERFLY,     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
-   OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
+   RIGHT_4_KEYS,
    OSL(RFN)
    ),
 
+#ifdef USE_DVORAK
   [DVORAK] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LeftBracket,
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
-   Key_LeftControl, OSL(AUX), OSM(LeftGui), Key_LeftShift,
+   LEFT_4_KEYS,
    OSL(LFN),
 
    ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    Key_BUTTERFLY,  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
-   OSM(RightAlt), OSM(RightShift), Key_Space, Key_Backspace,
+   RIGHT_4_KEYS,
    OSL(RFN)
    ),
+#else
+  [DVORAK] = KEYMAP_STACKED
+  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
+   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+   LEFT_4_KEYS,
+   OSL(LFN),
+
+   Key_RightBracket,  Key_6, Key_7, Key_8,     Key_9,      Key_0,         LockLayer(NUMPAD),
+   Key_Enter,         Key_Y, Key_U, Key_I,     Key_O,      Key_P,         Key_Equals,
+                      Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
+   Key_BUTTERFLY,     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
+   RIGHT_4_KEYS,
+   OSL(RFN)
+   ),
+#endif
 
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -188,14 +235,14 @@ KEYMAPS(
    ___),
 
   [NAV] =  KEYMAP_STACKED
-  (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  Key_LEDEffectNext,
-   XXX,  XXX,      MW(NW),   MM(Up),   MW(NE),   MS(Up),   MW(End),
+  (___,  KNFX(1),  KNFX(2),  KNFX(3),  KNFX(4),  KNFX(5),  M(MACRO_SWITCH_ZY),
+   WPD,  WND,      MW(NW),   MM(Up),   MW(NE),   MS(Up),   LALT(Key_Tab),
    ___,  MS(R),    MM(L),    MM(Dn),   MM(R),    MS(Dn),
-   XXX,  MS(L),    MW(SW),   XXX,      MW(SE),   XXX,      MM(BtnL),
+   XXX,  MS(L),    MW(SW),   XXX,      MW(SE),   MW(End),      MM(BtnL),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
-   XXX,        KNFX(6),     KNFX(7),     KNFX(8),      KNFX(9),     KNFX(10),  Key_F11,
+   Key_Led,    KNFX(6),     KNFX(7),     KNFX(8),      KNFX(9),     KNFX(10),  Key_F11,
    MM(BtnM),   Key_PageUp,  Key_Home,    Key_UpArrow,  Key_End,     XXX,       Key_F12,
                Key_PageDn,  Key_LArrow,  Key_DnArrow,  Key_RArrow,  XXX,       XXX,
    MM(BtnR),   XXX,         XXX,         XXX,          XXX,         XXX,       XXX,
@@ -213,7 +260,7 @@ KEYMAPS(
    M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KH_OU,       KH_UU,
    KC(PlaySlashPause),  KH_UDA,    KH_UA,     KH_IA,    KH_OA,    KH_UDA,      KH_ODA,
                         KH_UDA,    XXX,       XXX,      KH_EA,    KH_EA,       KH_AA,
-   Key_PcApplication,   XXX,       LAUNCHPAD, XXX,      XXX,      KH_UDA,      LOCK,
+   Key_PcApplication,   ASL,       LAUNCHPAD, XXX,      CCF9,     KH_UDA,      LOCK,
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
@@ -274,6 +321,19 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
       if (keyIsPressed(keyState)) {
         return MACRO(D(LeftControl), D(LeftAlt), D(mouseBtnL) /*, U(LeftControl), U(LeftAlt)*/);
       }
+      break;
+
+     case MACRO_SWITCH_ZY:
+        switch_z_y = !switch_z_y;
+        break;
+
+     case MACRO_PRESS_Z:
+        kaleidoscope::hid::pressKey(switch_z_y ? Key_Y : Key_Z);
+        break;
+
+     case MACRO_PRESS_Y:
+        kaleidoscope::hid::pressKey(switch_z_y ? Key_Z : Key_Y);
+        break;
   }
   return MACRO_NONE;
 }
@@ -281,23 +341,23 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // These 'solid' color effect definitions define a rainbow of
 // LED color modes calibrated to draw 500mA or less on the
 // Keyboardio Model 01.
-static kaleidoscope::LEDSolidColor solidColor(90, 30, 10);
+static kaleidoscope::plugin::LEDSolidColor solidColor(90, 30, 10);
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
    and turns them back on when it wakes up.
 */
 void toggleLedsOnSuspendResume(kaleidoscope::HostPowerManagement::Event event) {
   switch (event) {
-    case kaleidoscope::HostPowerManagement::Suspend:
+    case kaleidoscope::plugin::HostPowerManagement::Suspend:
       LEDControl.paused = true;
       LEDControl.set_all_leds_to({0, 0, 0});
       LEDControl.syncLeds();
       break;
-    case kaleidoscope::HostPowerManagement::Resume:
+    case kaleidoscope::plugin::HostPowerManagement::Resume:
       LEDControl.paused = false;
       LEDControl.refreshAll();
       break;
-    case kaleidoscope::HostPowerManagement::Sleep:
+    case kaleidoscope::plugin::HostPowerManagement::Sleep:
       break;
   }
 }
