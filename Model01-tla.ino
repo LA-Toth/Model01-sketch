@@ -1,5 +1,5 @@
 // -*- mode: c++ -*-
-// Copyright 2018 Laszlo Attila Toth
+// Copyright 2018-2020 Laszlo Attila Toth
 // See "COPYING" for license details
 
 #ifndef BUILD_INFORMATION
@@ -349,13 +349,10 @@ static kaleidoscope::plugin::LEDSolidColor solidColor(90, 30, 10);
 void toggleLedsOnSuspendResume(kaleidoscope::HostPowerManagement::Event event) {
   switch (event) {
     case kaleidoscope::plugin::HostPowerManagement::Suspend:
-      LEDControl.paused = true;
-      LEDControl.set_all_leds_to({0, 0, 0});
-      LEDControl.syncLeds();
+      LEDControl.disable();
       break;
     case kaleidoscope::plugin::HostPowerManagement::Resume:
-      LEDControl.paused = false;
-      LEDControl.refreshAll();
+      LEDControl.enable();
       break;
     case kaleidoscope::plugin::HostPowerManagement::Sleep:
       break;
