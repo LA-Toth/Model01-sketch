@@ -134,9 +134,11 @@ enum { MACRO_VERSION_INFO,
 
 // The CTRL to SHIFT and SHIFT to CTRL
 #define LEFT_4_KEYS     Key_CLeftCtrl, Key_LeftAlt , Key_CLeftGui, Key_LeftShift
-#define RIGHT_4_KEYS    Key_Backspace, OSM(RightShift), Key_Space, XXX
-// NOTE: my right "Ctrl" key switch is faulty as of now, I ignore the key
-// and map to another key
+#define RIGHT_4_KEYS    Key_RightAlt, OSM(RightShift), Key_Space, Key_Backspace
+
+
+//#define SW_OTHER        LockLayer(OTHER)
+#define SW_OTHER        OSL(OTHER)
 
 //
 // End of shortening and mapping
@@ -157,7 +159,7 @@ bool switch_z_y = true;
 // layers
 enum {
   MINE,
-  DVORAK,
+  OTHER,
   NUMPAD,
   NAV,
   AUX, // close to original Hungarian layout
@@ -172,7 +174,7 @@ enum {
 KEYMAPS(
 
   [MINE] = KEYMAP_STACKED
-  (OSL(DVORAK),  Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
+  (SW_OTHER,     Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Y, Key_X, Key_C, Key_V, Key_B, Key_Escape,
@@ -188,7 +190,7 @@ KEYMAPS(
    ),
 
 #ifdef USE_DVORAK
-  [DVORAK] = KEYMAP_STACKED
+  [OTHER] = KEYMAP_STACKED
   (___,          Key_1,         Key_2,     Key_3,      Key_4, Key_5, Key_LeftBracket,
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
@@ -196,7 +198,7 @@ KEYMAPS(
    LEFT_4_KEYS,
    OSL(LFN),
 
-   ___,            Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
+   Key_RightBracket, Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(NUMPAD),
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    Key_BUTTERFLY,  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
@@ -204,7 +206,7 @@ KEYMAPS(
    OSL(RFN)
    ),
 #else
-  [DVORAK] = KEYMAP_STACKED
+  [OTHER] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LeftBracket,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
