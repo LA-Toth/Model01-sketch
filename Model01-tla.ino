@@ -1,5 +1,5 @@
 // -*- mode: c++ -*-
-// Copyright 2018-2020 Laszlo Attila Toth
+// Copyright 2018-2021 Laszlo Attila Toth
 // See "COPYING" for license details
 
 #ifndef BUILD_INFORMATION
@@ -111,6 +111,16 @@ enum { MACRO_VERSION_INFO,
 #define KH_UU  RALT(Key_Quote)
 #define KH_ODA RALT(Key_J)
 #define KH_UDA RALT(Key_F)
+// Windows
+#define KH_AAW  Key_Quote
+#define KH_EAW  Key_Semicolon
+#define KH_IAW  Key_I
+#define KH_OAW  Key_Equals
+#define KH_UAW  Key_RightBracket
+#define KH_OUW  Key_0
+#define KH_UUW  Key_Minus
+#define KH_ODAW Key_LeftBracket
+#define KH_UDAW Key_BSl
 
 // Specific keys for my apps
 #define LAUNCHPAD     LALT(LCTRL(LGUI(LSHIFT(Key_M))))
@@ -164,6 +174,7 @@ enum {
   NAV,
   AUX, // close to original Hungarian layout
   RSIDE, // One side only to work with other input devices
+  AUXFROMOTHER, // The AUX with Windows-compatible accented chars opened from OTHER layer.
 };
 
 /* This comment temporarily turns off astyle's indent enforcement
@@ -219,7 +230,7 @@ KEYMAPS(
                       Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    Key_BUTTERFLY,     Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_Minus,
    RIGHT_4_KEYS,
-   OSL(RFN)
+   OSL(AUXFROMOTHER)
    ),
 #endif
 
@@ -281,6 +292,22 @@ KEYMAPS(
                Key_L, Key_I, Key_Y, ___, ___, ___,
    Key_Space,  Key_W, Key_B, Key_S, Key_M, ___, ___,
    Key_RightGui, Key_RightShift, Key_RightAlt, Key_RightControl,
+   ___),
+
+  // Same as AUX except that it works on Windows
+  [AUXFROMOTHER] =  KEYMAP_STACKED
+  (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
+   KC(PlaySlashPause),    XXX,     KH_UDAW, KH_EAW,   Key_BSl,    Key_RightBracket, KC(VolDec),
+   KC(ScanPreviousTrack), KH_AAW,  KH_UUW,  KH_ODAW,  KH_OUW,     Key_LeftBracket,
+   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
+   ___, Key_Del, Key_Enter, ___,
+   ___,
+
+   M(MACRO_ANY),        KAFX(6),   KAFX(7),   KAFX(8),  KAFX(9),  KH_OUW,       KH_UUW,
+   KC(PlaySlashPause),  KH_UDAW,   KH_UAW,    KH_IAW,   KH_OAW,   KH_UDAW,      KH_ODAW,
+                        KH_UDAW,   XXX,       XXX,      KH_EAW,   KH_EAW,       KH_AAW,
+   Key_PcApplication,   ASL,       LAUNCHPAD, XXX,      CCF9,     KH_UDAW,      LOCK,
+   ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 ) // KEYMAPS()
 
