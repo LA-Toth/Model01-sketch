@@ -330,11 +330,14 @@ static void versionInfoMacro(uint8_t keyState) {
 
 static void anyKeyMacro(uint8_t keyState) {
   static Key lastKey;
-  if (keyToggledOn(keyState))
-    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
+  bool toggledOn = false;
+  if (keyToggledOn(keyState)) {
+    lastKey.setKeyCode(Key_A.getKeyCode() + (uint8_t)(millis() % 36));
+    toggledOn = true;
+  }
 
   if (keyIsPressed(keyState))
-    kaleidoscope::hid::pressKey(lastKey);
+    Kaleidoscope.hid().keyboard().pressKey(lastKey, toggledOn);
 }
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
@@ -359,11 +362,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
         break;
 
      case MACRO_PRESS_Z:
-        kaleidoscope::hid::pressKey(switch_z_y ? Key_Y : Key_Z);
+        Kaleidoscope.hid().keyboard().pressKey(switch_z_y ? Key_Y : Key_Z);
         break;
 
      case MACRO_PRESS_Y:
-        kaleidoscope::hid::pressKey(switch_z_y ? Key_Z : Key_Y);
+        Kaleidoscope.hid().keyboard().pressKey(switch_z_y ? Key_Z : Key_Y);
         break;
   }
   return MACRO_NONE;
@@ -414,10 +417,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // with a custom LED effect
   NumPad,
 
+  OneShot,
+
   // The macros plugin adds support for macros
   Macros,
 
-  OneShot,
 #if WITH_ACTIVE_MODE_LED
   ActiveModColorEffect,
 #endif
