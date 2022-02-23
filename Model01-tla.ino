@@ -114,7 +114,7 @@ enum { MACRO_VERSION_INFO,
 // Windows
 #define KH_AAW  Key_Quote
 #define KH_EAW  Key_Semicolon
-#define KH_IAW  Key_I
+#define KH_IAW  Key_NonUsBackslashAndPipe
 #define KH_OAW  Key_Equals
 #define KH_UAW  Key_RightBracket
 #define KH_OUW  Key_0
