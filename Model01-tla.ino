@@ -1,5 +1,5 @@
 // -*- mode: c++ -*-
-// Copyright 2018-2021 Laszlo Attila Toth
+// Copyright 2018-2022 Laszlo Attila Toth
 // See "COPYING" for license details
 
 #ifndef BUILD_INFORMATION
@@ -31,6 +31,9 @@
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
+
+// Addditional constants
+#include "constants.h"
 
 // MACRO NAMES
 enum { MACRO_VERSION_INFO,
