@@ -42,6 +42,7 @@ enum { MACRO_VERSION_INFO,
        MACRO_SWITCH_ZY,
        MACRO_PRESS_Z,
        MACRO_PRESS_Y,
+       MACRO_CONST_01,
      };
 
 //
@@ -263,7 +264,7 @@ KEYMAPS(
    Key_Led,    KNFX(6),     KNFX(7),     KNFX(8),      KNFX(9),     KNFX(10),  Key_F11,
    MM(BtnM),   Key_PageUp,  Key_Home,    Key_UpArrow,  Key_End,     XXX,       Key_F12,
                Key_PageDn,  Key_LArrow,  Key_DnArrow,  Key_RArrow,  XXX,       XXX,
-   MM(BtnR),   XXX,         XXX,         XXX,          XXX,         XXX,       XXX,
+   MM(BtnR),   XXX,         XXX,         XXX,          XXX,         XXX,       M(MACRO_CONST_01),
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
@@ -371,6 +372,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
      case MACRO_PRESS_Y:
         Kaleidoscope.hid().keyboard().pressKey(switch_z_y ? Key_Z : Key_Y);
         break;
+
+     case MACRO_CONST_01:
+      if (keyToggledOn(keyState)) {
+        Macros.type(PSTR(MTLA_C_01));
+      }
   }
   return MACRO_NONE;
 }
