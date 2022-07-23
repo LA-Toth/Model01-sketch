@@ -268,7 +268,7 @@ KEYMAPS(
   (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
    KC(PlaySlashPause),    XXX,     KH_UDA,  KH_EA,    Key_BSl,    Key_RightBracket, KC(VolDec),
    KC(ScanPreviousTrack), KH_AA,   KH_UU,   KH_ODA,   KH_OU,      Key_LeftBracket,
-   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
+   KC(ScanNextTrack),     XXX,     Key_PrtScr, XXX,   INS_NOFMT,  XXX,              KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
@@ -299,7 +299,7 @@ KEYMAPS(
   (___,                   KAFX(1), KAFX(2), KAFX(3),  KAFX(4),    KAFX(5),          KC(Mute),
    KC(PlaySlashPause),    XXX,     KH_UDAW, KH_EAW,   Key_BSl,    Key_RightBracket, KC(VolDec),
    KC(ScanPreviousTrack), KH_AAW,  KH_UUW,  KH_ODAW,  KH_OUW,     Key_LeftBracket,
-   KC(ScanNextTrack),     XXX,     XXX,     XXX,      INS_NOFMT,  XXX,              KC(VolInc),
+   KC(ScanNextTrack),     XXX,     Key_PrtScr, XXX,   INS_NOFMT,  XXX,              KC(VolInc),
    ___, Key_Del, Key_Enter, ___,
    ___,
 
