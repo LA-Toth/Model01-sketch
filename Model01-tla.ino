@@ -239,14 +239,14 @@ KEYMAPS(
 #endif
 
   [NUMPAD] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
+  (___, Key_1, Key_2, Key_3, Key_4, Key_5, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___,
    ___,
 
-   M(MACRO_VERSION_INFO),  ___, KK(7), KK(8),   KK(9),        KK(Subtract), ___,
+   M(MACRO_VERSION_INFO), Key_6, KK(7), KK(8),   KK(9),        KK(Subtract), ___,
    ___,                    ___, KK(4), KK(5),   KK(6),        KK(Add),      LSHIFT(Key_7),
                            ___, KK(1), KK(2),   KK(3),        Key_Equals,   Key_Quote,
    ___,                    ___, KK(0), KK(Dot), KK(Multiply), KK(Divide),   Key_Enter,
@@ -451,6 +451,7 @@ void setup() {
 
   // We want the keyboard to be able to wake the host up from suspend.
   HostPowerManagement.enableWakeup();
+
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
