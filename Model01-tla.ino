@@ -43,6 +43,9 @@ enum { MACRO_VERSION_INFO,
        MACRO_PRESS_Z,
        MACRO_PRESS_Y,
        MACRO_CONST_01,
+       MACRO_CONST_02,
+       MACRO_CONST_03,
+       MACRO_CONST_04,
      };
 
 //
@@ -154,9 +157,21 @@ enum { MACRO_VERSION_INFO,
 //#define SW_OTHER        LockLayer(OTHER)
 #define SW_OTHER        OSL(OTHER)
 
+#define MTLA(number)    M(MACRO_CONST_ ## number)
+
 //
 // End of shortening and mapping
 //
+
+
+#define MTLA_SEND_MACRO(number) \
+      \
+     case MACRO_CONST_ ## number: \
+      if (keyToggledOn(event.state)) { \
+        Macros.type(PSTR(MTLA_C_ ## number)); \
+      } \
+      break;
+
 
 /** The Model 01's key layouts are defined as 'keymaps'.
        https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keyboard.h
@@ -264,7 +279,7 @@ KEYMAPS(
    Key_Led,    KNFX(6),     KNFX(7),     KNFX(8),      KNFX(9),     KNFX(10),  Key_F11,
    MM(BtnM),   Key_PageUp,  Key_Home,    Key_UpArrow,  Key_End,     XXX,       Key_F12,
                Key_PageDn,  Key_LArrow,  Key_DnArrow,  Key_RArrow,  XXX,       XXX,
-   MM(BtnR),   XXX,         XXX,         XXX,          XXX,         XXX,       M(MACRO_CONST_01),
+   MM(BtnR),   XXX,         XXX,         MTLA(04),     MTLA(03),    MTLA(02),  MTLA(01),
    ___, OSM(LeftAlt), ___, Key_Del,
    ___),
 
@@ -332,31 +347,26 @@ static void versionInfoMacro(uint8_t keyState) {
   }
 }
 
-static void anyKeyMacro(uint8_t keyState) {
-  static Key lastKey;
-  bool toggledOn = false;
-  if (keyToggledOn(keyState)) {
-    lastKey.setKeyCode(Key_A.getKeyCode() + (uint8_t)(millis() % 36));
-    toggledOn = true;
+static void anyKeyMacro(KeyEvent &event) {
+  if (keyToggledOn(event.state)) {
+    event.key.setKeyCode(Key_A.getKeyCode() + (uint8_t)(millis() % 36));
+    event.key.setFlags(0);
   }
-
-  if (keyIsPressed(keyState))
-    Kaleidoscope.hid().keyboard().pressKey(lastKey, toggledOn);
 }
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  switch (macroIndex) {
+const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
+  switch (macro_id) {
 
     case MACRO_VERSION_INFO:
-      versionInfoMacro(keyState);
+      versionInfoMacro(event.state);
       break;
 
     case MACRO_ANY:
-      anyKeyMacro(keyState);
+      anyKeyMacro(event);
       break;
 
     case MACRO_CTRL_ALT_LCLICK:
-      if (keyIsPressed(keyState)) {
+      if (keyIsPressed(event.state)) {
         return MACRO(D(LeftControl), D(LeftAlt), D(mouseBtnL) /*, U(LeftControl), U(LeftAlt)*/);
       }
       break;
@@ -373,10 +383,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
         Kaleidoscope.hid().keyboard().pressKey(switch_z_y ? Key_Z : Key_Y);
         break;
 
-     case MACRO_CONST_01:
-      if (keyToggledOn(keyState)) {
-        Macros.type(PSTR(MTLA_C_01));
-      }
+    MTLA_SEND_MACRO(01)
+    MTLA_SEND_MACRO(02)
+    MTLA_SEND_MACRO(03)
+    MTLA_SEND_MACRO(04)
+
   }
   return MACRO_NONE;
 }
@@ -450,7 +461,7 @@ void setup() {
   NumPad.numPadLayer = NUMPAD;
 
   // We want the keyboard to be able to wake the host up from suspend.
-  HostPowerManagement.enableWakeup();
+  //HostPowerManagement.enableWakeup();
 
 
   // We want to make sure that the firmware starts with LED effects off
@@ -459,7 +470,7 @@ void setup() {
   LEDOff.activate();
 
 #if WITH_ACTIVE_MODE_LED
-  ActiveModColorEffect.highlight_color = CRGB(0x00, 0xff, 0xff);
+  ActiveModColorEffect.setHighlightColor(CRGB(0x00, 0xff, 0xff));
 #endif
 #if WITH_SHIFT_LAYERS
   SHSH_USE_LAYERS();

@@ -1,1 +1,4 @@
-#define MTLA_C_01 "laszlo.attila.toth"
+#define MTLA_C_01 ""
+#define MTLA_C_02 ""
+#define MTLA_C_03 ""
+#define MTLA_C_04 ""
